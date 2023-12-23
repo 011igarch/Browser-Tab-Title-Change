@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anderen Tab öffnen 👈</title>
+  </head>
+  <body>
+    <script>
+      const title = document.title;
+      const blurMessage = [
+        "Komm zurück! 🙏 ",
+        "Jetzt 20 % sparen ✔",
+        "Jetzt 30 % sparen ✔",
+        "Jetzt 50 % sparen ✔ ",
+      ];
+
+      let intervalTimer = null;
+      let timeoutTimer = null;
+
+      window.addEventListener("blur", function () {
+        intervalTimer = setInterval(function () {
+          const rand = Math.floor(Math.random() * blurMessage.length);
+          document.title = blurMessage[rand];
+          timeoutTimer = setTimeout(function () {
+            document.title = title;
+          }, 1000);
+        }, 2000);
+      });
+
+      window.addEventListener("focus", function () {
+        clearInterval(intervalTimer);
+        clearTimeout(timeoutTimer);
+        document.title = title;
+      });
+    </script>
+  </body>
+</html>
